@@ -35,7 +35,7 @@ client-profile="dd-agent"
 group-blacklist="^(console-consumer-|python-kafka-consumer-|quick-).*$"
 group-whitelist=""
 
-[consumer.test_zk]
+[consumer.prod_zk]
 class-name="kafka_zk"
 cluster="prod"
 servers=[ "10.0.11.87:2181", "10.0.11.105:2181", "10.0.11.29:2181" ]

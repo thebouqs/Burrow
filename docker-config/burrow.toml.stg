@@ -1,0 +1,55 @@
+[general]
+pidfile="burrow.pid"
+stdout-logfile=""
+access-control-allow-origin="mysite.example.com"
+
+[logging]
+level="info"
+maxsize=100
+maxbackups=30
+maxage=10
+use-localtime=false
+use-compression=true
+
+[zookeeper]
+servers=[ "ip-10-10-3-110.ec2.internal:2181", "ip-10-10-3-237.ec2.internal:2181", "ip-10-10-3-19.ec2.internal:2181" ]
+timeout=6
+root-path="/burrow"
+
+[client-profile.test]
+client-id="burrow-test"
+kafka-version="0.10.0.1"
+
+[cluster.test]
+class-name="kafka"
+servers=[ "ip-10-10-3-110.ec2.internal:9092", "ip-10-10-3-237.ec2.internal:9092", "ip-10-10-3-19.ec2.internal:9092" ]
+client-profile="test"
+topic-refresh=120
+offset-refresh=30
+
+[consumer.test]
+class-name="kafka"
+cluster="test"
+servers=[ "ip-10-10-3-110.ec2.internal:9092", "ip-10-10-3-237.ec2.internal:9092", "ip-10-10-3-19.ec2.internal:9092" ]
+client-profile="test"
+group-blacklist="^(console-consumer-|python-kafka-consumer-|quick-).*$"
+group-whitelist=""
+
+[consumer.test_zk]
+class-name="kafka_zk"
+cluster="test"
+servers=[ "ip-10-10-3-110.ec2.internal:2181", "ip-10-10-3-237.ec2.internal:2181", "ip-10-10-3-19.ec2.internal:2181" ]
+zookeeper-path=""
+zookeeper-timeout=30
+group-blacklist="^(console-consumer-|python-kafka-consumer-|quick-).*$"
+group-whitelist=""
+
+[httpserver.default]
+address=":8000"
+
+[storage.default]
+class-name="inmemory"
+workers=20
+intervals=15
+expire-group=604800
+min-distance=1

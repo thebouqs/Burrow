@@ -16,6 +16,6 @@ LABEL maintainer="LinkedIn Burrow https://github.com/linkedin/Burrow"
 
 WORKDIR /app
 COPY --from=builder /tmp/burrow /app/
-ADD /docker-config/burrow.toml /etc/burrow/
+ADD /docker-config/burrow.toml.prod /etc/burrow/
 
 CMD ["/app/burrow", "--config-dir", "/etc/burrow"]
